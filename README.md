@@ -3,39 +3,16 @@
 Demonstrating an issue with swagger and RepositoryRestResource
 Swagger2 is showing the returntype as
 
-```:json
-{
-  "content": [
+"_embedded": [
     {
       "id": "string",
       "name": "string"
     }
   ],
-  "links": [
-    {
-      "href": "string",
-      "rel": "string",
-      "templated": true
-    }
-  ]
-}
-```
+but is returned as
 
-but the request returns
-```:json
-{
-  "_embedded": {
+"_embedded": {
     "guys": []
   },
-  "_links": {
-    "self": {
-      "href": "http://localhost:8080/guys"
-    },
-    "profile": {
-      "href": "http://localhost:8080/profile/guys"
-    },
-    "search": {
-      "href": "http://localhost:8080/guys/search"
-    }
-  }
-}```
+it seems like springfox is not taking in
+@RepositoryRestResource( collectionResourceRel = "guys",itemResourceRel = "guy")
